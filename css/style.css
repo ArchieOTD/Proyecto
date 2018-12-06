@@ -1,0 +1,40 @@
+#lo{
+	transform: translate(20px,4px);
+	width: 35px;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+h1{
+	text-align: center;
+}
+
+.producciones{
+    display : flex;	
+}
+
+ul.menu-inicial a{
+    text-decoration: none;
+}
+
+
+ul.contProduccion{
+     display: flex;
+     list-style : none;
+}
+
+ul.contProduccion li{
+	 padding: 0px 10px;
+}
+
+ #flecha{
+	width: 30px;
+ }

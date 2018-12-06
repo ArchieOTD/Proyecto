@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Instructivo</title>
+	<link rel="shortcut icon" type="img/png" href="img/icono.png">
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>
+	<!-- NAVBAR -->
+	<nav>
+		<div class="nav-wrapper indigo darken">
+			<a href="index.html" class="brand-logo"><img id="lo" src="img/LOGO.png" alt="logo" ></a>
+			<a href="index.html" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+			<ul class="right hide-on-med-and-down">
+				<li><a href="index.html">Gramáticas</a></li>
+				<li><a href="quienes.html">¿Quiénes somos?</a></li>
+				<li><a href="porque.html">Instrucciones</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<ul class="sidenav" id="mobile-demo">
+		<li><a href="index.html">Gramáticas</a></li>
+		<li><a href="quienes.html">¿Quiénes somos?</a></li>
+		<li><a href="porque.html">Instrucciones</a></li>
+	</ul>
+
+	<!-- FIN NAVBAR -->
+	<!-- MAIN CONTAINER o CONTENEDOR PRINCIPAL -->
+	<main>
+		<H1>¿CÓMO FUNCIONA?</H1>
+		<ol>
+			<li> Primero debe ingresar un NO TERMINAL en el cuadro vacío del lado izquierdo. Para definirlo como NO TERMINAL debe ingresar sólo un caracter (A-Z) y en MAYÚSCULA.</li>
+			<li> Ingresar la NO TERMINAL seleccionando el BOTÓN de "más" (+) que está justo a un lado del BOTÓN de "FINALIZAR".</li>
+			<li> A continuación, ingresa una PALABRA en el recuadro que aparece contiguo hacia la derecha. Una PALABRA se define como CARACTERES CONCATENADOS excluyendo los NÚMEROS, es decir, ingresa MINÚSCULAS y MAYÚSCULAS a tu antojo.</li>
+			<li> Para ingresar una palabra es necesario que la NO TERMINAL haya sido ingresada previamente como en los pasos anteriores explicado, y posteriormente seleccionar el BOTÓN de "más" (+) posicionado a LA DERECHA de la palabra a ingresar.</li>
+			<li> Puedes ingresar tantas palabras como tú quieras, o SÍMBOLOS VACÍOS dejando en BLANCO el recuadro y seleccionando el BOTÓN de "más" (+).</li>
+			<li> Puedes finalizar el proceso aquí seleccionando el BOTÓN de "TERMINAR" posicionado al final de las PRODUCCIONES, o repetir los pasos anteriores en caso de querer ingresar más NO TERMINALES como PRODUCCIONES de cada una.</li>
+			<li> Una vez que hayas hecho CLICK en "FINALIZAR", te redireccionará a una nueva ventana donde te mostrará en pantalla todos los datos que ingresaste ordenados por ALFABETO, NO TERMINALES, SÍMBOLO INICIAL y PRODUCCIONES que ingresaste.</li>
+			<li> Para convertir PASO A PASO tu gramática IMPROPIA a PROPIA, basta con seleccionar el BOTÓN colocado hasta abajo del CUERPO que dice "CONVERTIR", cada vez que des CLICK sobre él, la página se actualizará y mostrará en pantalla CADA ALGORITMO REALIZADO por cada CLICK que hayas dado. En total deberás dar CLICK seis veces sobre el BOTÓN para terminar de convertir tu gramática.</li>
+		</ol>
+
+
+	</main>
+
+	<!-- FOOTER -->
+
+	<footer class="page-footer grey darken-4">
+	         <div class="container">
+	           <div class="row">
+	             <div class="col l6 s12">
+	               <h5 class="white-text">Lenguajes Formales y Autómatas</h5>
+	               <p class="grey-text text-lighten-4">Esta página fue diseñada con el único fin académico, no de lucro.</p>
+	             </div>
+	             <div class="col l4 offset-l2 s12">
+	               <h5 class="white-text">Contáctanos</h5>
+	               <ul>
+	                 <li><a class="grey-text text-lighten-3" href="http://www.facebook.com/richie.b.rosales">Facebook de Ricardo</a></li>
+									 <li><a class="grey-text text-lighten-3" href="http://www.facebook.com/daniel.archiemedes">Facebook de Daniel</a></li>
+	               </ul>
+	             </div>
+	           </div>
+	         </div>
+	         <div class="footer-copyright">
+	           <div class="container">
+	           © 2018. Queda permitido replicar esta página con fines académicos.
+	           <a class="grey-text text-lighten-4 right" href="porque.html">Volver a cargar la página</a>
+	           </div>
+	         </div>
+	       </footer>
+	
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+
+</body>
+</html>
