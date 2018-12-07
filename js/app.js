@@ -211,7 +211,7 @@ function agregarProducciones(span){
     var li_noTerminalSig = document.createElement("li");
     var li_flecha = document.createElement("li");
     var noTerminalSig = document.createElement("input");
-    var flecha = document.createElement("h3");
+    var flecha = document.createElement("img");
     var produccionSig = document.createElement("input");
     var botonesPalabraSig = document.createElement("button");
     
@@ -239,9 +239,11 @@ function agregarProducciones(span){
     
 
     //Asignando valores a las nuevas etiquetas
-    flecha.innerHTML = "--->";
+    flecha.id = "flecha";
+    flecha.src = "img/flecha.png";
     botonesPalabraSig.innerHTML = "+";
     nuevosNT.innerHTML = "+";
+    
     
     //Agregando las etiquetas al la barra 
     li_noTerminalSig.appendChild(noTerminalSig);
