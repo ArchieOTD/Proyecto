@@ -39,35 +39,47 @@ function obtenerGramatica(){
         botonConvertir.innerHTML = "Convertir";
         botonConvertir.style.padding = "150px 0px";
 
-
+        console.log(q);
         botonConvertir.addEventListener('click',()=>{
-            if(q == 0){
+            if(q == 0 || q == 4){
                 q++;
                 eliminacionSimbolosMuertos(listaDeNoTerminales.length);
-            }else if(q ==1 || q == 4){
+            }else if(q ==1 || q == 5){
                 q++;
                 if(listaDeNoTerminales.length>1){
                     eliminacionSimbolosInaccesibles(listaDeNoTerminales[1].valor,1);
                 }else{
+                    var h3 = document.createElement("h3");
+                    h3.innerHTML = "Eliminaste símbolos inaccesibles";
+                    var body_programa = document.getElementById("body_programa");
+                    body_programa.appendChild(h3);
                     obtenerGramatica();
                 }
-            }else if(q ==2 || q == 5){
+            }else if(q ==2 ){
                 q++;
-                if(listaDeNoTerminales.length>1){
+                if(listaDeNoTerminales.length>=1){
                     eliminacionProduccionesVacias();
                 }else{
                     obtenerGramatica();
                 }
-                if(q == 5){
-                    //Terminar producciones
-                }
+                
             }else if(q == 3){
                 q++;
-                if(listaDeNoTerminales.length>1){
+                if(listaDeNoTerminales.length>=1){
                     eliminacionSimbolosUnitarios();
                 }else{
                     obtenerGramatica();
                 }
+            }else if(q == 6){
+                /* //Terminar algoritmos eh imprimir gramática impropia
+                window.open("gramaticaPropia.html", "Diseño Web", "width=300, height=200")
+                var body_programa = document.getElementById("body_programa_g");
+                var divGramatica = document.createElement("div");
+                frontElementosGramatica(divGramatica);
+                divGramatica.id = "contenido";
+                body_programa.appendChild(divGramatica);
+                body_programa.appendChild(h3);
+                return ;*/
             }
         });
         
@@ -76,50 +88,10 @@ function obtenerGramatica(){
         
 
         //Creando elementos para el front 
-        for(var i =0 ; i < 4;i++){
-        var h3 = document.createElement("h3");
-        h3.style.padding = '30px 100px';
-        switch(i){
-            case 0 :
-                h3.innerHTML = 'S  =  {' + listaDeNoTerminales[0].valor + '}';
-            break;
-            case 1 :
-                obtenerListaNT();
-                h3.innerHTML = 'NT =  {' + noTerminalesli + '}';
-                break;
-            case 2 :
-                obtenerAlfabeto();
-                h3.innerHTML = '∑  =  {'+ alfabeto + '}';
-                break;
-            case 3 : 
-                var divProducciones = document.createElement('div');
-                var producciones1 = document.createElement('h3');
-                var producciones3 = document.createElement('h3');
-                producciones1.innerHTML = 'P : { ';
-                producciones3.innerHTML = '}';
-                divProducciones.appendChild(producciones1);
-                for(var n = 0 ; n < listaDeNoTerminales.length ; n++){
-                    for(k= 0; k < listaDeNoTerminales[n].producciones.length; k++){
-                        let palabras = listaDeNoTerminales[n].producciones;
-                        if(k>0){
-                            if(palabras[k]==palabras[k-1]){
-                                listaDeNoTerminales[n].producciones.splice(k,1);
-                                k = k-1;
-                            }
-                        }
-                    }
-                    var producciones2 = document.createElement('h3');
-                    producciones2.innerHTML = listaDeNoTerminales[n].valor + '--->' + listaDeNoTerminales[n].producciones;
-                    divProducciones.appendChild(producciones2); 
-                } 
-                divProducciones.appendChild(producciones3);
-                divProducciones.style.padding = '30px 100px';
-                divGramatica.appendChild(divProducciones);
-                break;     
-        }
+        divGramatica = frontElementosGramatica(divGramatica);
+
         //Agregamos los resultados a una nueva visualización de la pantalla. 
-        divGramatica.appendChild(h3);
-        }
+       
         divGramatica.appendChild(botonConvertir);
         divGramatica.id = "contenido";
         body_programa.appendChild(divGramatica);
@@ -129,8 +101,60 @@ function obtenerGramatica(){
 }
 
 
+
+function frontElementosGramatica(divGramatica){
+        for(var i =0 ; i < 4;i++){
+            var h3 = document.createElement("h3");
+            h3.style.padding = '30px 100px';
+            switch(i){
+                case 0 :
+                    h3.innerHTML = 'S  =  {' + listaDeNoTerminales[0].valor + '}';
+                break;
+                case 1 :
+                    obtenerListaNT();
+                    h3.innerHTML = 'NT =  {' + noTerminalesli + '}';
+                    break;
+                case 2 :
+                    obtenerAlfabeto();
+                    h3.innerHTML = '∑  =  {'+ alfabeto + '}';
+                    break;
+                case 3 : 
+                    var divProducciones = document.createElement('div');
+                    var producciones1 = document.createElement('h3');
+                    var producciones3 = document.createElement('h3');
+                    producciones1.innerHTML = 'P : { ';
+                    producciones3.innerHTML = '}';
+                    divProducciones.appendChild(producciones1);
+                    for(var n = 0 ; n < listaDeNoTerminales.length ; n++){
+                        for(var k= 0; k < listaDeNoTerminales[n].producciones.length; k++){
+                            let palabras = listaDeNoTerminales[n].producciones;
+                            palabras.sort();
+                            if(k>0){
+                                if(palabras[k]==palabras[k-1]){
+                                    listaDeNoTerminales[n].producciones.splice(k,1);
+                                    k = k-1;
+                                }
+                            }
+                        }
+                        var producciones2 = document.createElement('h3');
+                        producciones2.innerHTML = listaDeNoTerminales[n].valor + '--->' + listaDeNoTerminales[n].producciones;
+                        divProducciones.appendChild(producciones2); 
+                    } 
+                    divProducciones.appendChild(producciones3);
+                    divProducciones.style.padding = '30px 100px';
+                    divGramatica.appendChild(divProducciones);
+                    break;     
+            }
+            divGramatica.appendChild(h3);
+        }
+        return divGramatica;
+}
+
+
 //Al presionar el botón de + a lado de la casilla de palabras se realiza esta función para abrir una nuva casilla de input y crear una nueva palabra
 function agregarPalabra(lugarNP, produccion){   
+    var botonSigProduccion = document.getElementById('sigProduccion');
+    var botonTerminarProduccion = document.getElementById('terminarProducciones');
     var produccionIngresada = document.createElement("h3");
     if(lugarNP.firstChild.nextSibling.firstChild.value == '' || listaDeNoTerminales.length == 0 ){
         alert('Requiere un no terminal');
@@ -138,7 +162,7 @@ function agregarPalabra(lugarNP, produccion){
         alert('Requiere un no terminal');
     }else{
         if(produccion.value == ''){
-            produccionIngresada.innerHTML = "ε | ";
+            produccionIngresada.innerHTML = "ε |";
             lugarNP.appendChild(produccionIngresada);
             if(typeof lugarNP.firstChild.nextSibling.firstChild.value == "string"){
                 agregarProduccionesObjetos(lugarNP.firstChild.nextSibling.firstChild.value, "ε" );
@@ -160,22 +184,21 @@ function agregarPalabra(lugarNP, produccion){
     }
 }
 
+
 //Cuando se presiona el boton con signo (+), por medio de esta función se crean nuevos noTerminales o producciones
 function agregarNT(noTerminal){   
-    //console.log(noTerminal.value);
     if(noTerminal.value == noTerminal.value.toLowerCase() || "number" == typeof noTerminal || noTerminal.value == '' || noTerminal.value.length > 1){
         alert("Ingresa una letra mayuscula");
-        if(c!=0){
-            c--;
-        };
+        if(c!=0){c--};
     }else if(recorrerListaNT(noTerminal.value)){
         alert("Ingresa un elemento que no se repita");
-        c--;
+        if(c!=0){c--};
     }else{
         noTerminal.disabled = true;
         var lugar = document.getElementById("nuevos-terminales");
         listaDeNoTerminales.push(new ProduccionAceptada(noTerminal.value));
         agregarProducciones(lugar)  
+        
     }
 }
 
@@ -188,7 +211,7 @@ function agregarProducciones(span){
     var li_noTerminalSig = document.createElement("li");
     var li_flecha = document.createElement("li");
     var noTerminalSig = document.createElement("input");
-    var flecha = document.createElement("img");
+    var flecha = document.createElement("h3");
     var produccionSig = document.createElement("input");
     var botonesPalabraSig = document.createElement("button");
     
@@ -204,7 +227,8 @@ function agregarProducciones(span){
     
     nuevosNT.addEventListener("click", ()=>{    //
         agregarNT(inputNt[c]);
-        c++;
+        if(inputNt[c].value.toUpperCase() == inputNt[c].value){c++;}
+        
     });
     
 
@@ -215,9 +239,7 @@ function agregarProducciones(span){
     
 
     //Asignando valores a las nuevas etiquetas
-   
-    flecha.src = "img/flecha.png";
-    flecha.id= "flecha";
+    flecha.innerHTML = "--->";
     botonesPalabraSig.innerHTML = "+";
     nuevosNT.innerHTML = "+";
     
@@ -309,7 +331,6 @@ function eliminacionSimbolosMuertos(tamanioProducciones){
         for(var n = 0 ; n < listaDeNoTerminales[i].producciones.length;n++){
             let produccionesVar = listaDeNoTerminales[i].producciones
             ban = true;
-            console.log(produccionesVar);
             for(var k = 0 ; k <  produccionesVar[n].length ; k++){
                 let valor = produccionesVar[n];
                 if(!recorrerListaNT(valor[k]) && valor[k] == valor[k].toUpperCase()){
@@ -317,7 +338,11 @@ function eliminacionSimbolosMuertos(tamanioProducciones){
                     if(n > 0 && ban == true ){
                         n = n-1;
                         ban = false;
-                    }else if(produccionesVar.length==0){
+                    }else if(n == 0){
+                        listaDeNoTerminales.splice(i,1);
+                        eliminacionSimbolosMuertos(listaDeNoTerminales.length);
+                        return;
+                    }else if(produccionesVar.length==0 && listaDeNoTerminales.length == 1){
                         alert("La gramatica se vacio");
                         location.reload();
                     }
@@ -348,8 +373,6 @@ function eliminacionSimbolosMuertos(tamanioProducciones){
         }
         c = 0 ; 
     }
-    
-    console.log(listaDeNoTerminales);
     if(listaDeNoTerminales.length<tamanioProducciones){
         eliminacionSimbolosMuertos(listaDeNoTerminales.length);
     }else{var h3 = document.createElement("h3");
@@ -409,7 +432,7 @@ function eliminacionProduccionesVacias(){
             let produccionesVar = listaDeNoTerminales[i].producciones
             for(var k = 0 ; k <  produccionesVar[n].length ; k++){
                 let valor = listaDeNoTerminales[i].producciones[n];
-                if(valor[k] == 'ε' && produccionesVar[n].length ==1){
+                if(valor[k] == 'ε' ){
                     listaNT.push(listaDeNoTerminales[i].valor);
                     produccionesVar.splice(n,1);
                     if(n >0){
@@ -420,12 +443,13 @@ function eliminacionProduccionesVacias(){
         }
     }
     if(listaNT.length != 0 ){
+        console.log(listaNT);
         for(var m = 0 ; m < listaNT.length; m++){
             for(var i = 0 ; i<listaDeNoTerminales.length; i++){
                 for(var n = 0 ; n < listaDeNoTerminales[i].producciones.length;n++){
                     let produccionesVar = listaDeNoTerminales[i].producciones
                     for(var k = 0 ; k <  produccionesVar[n].length ; k++){
-                        let valor = listaDeNoTerminales[i].producciones[n];
+                        let valor = produccionesVar[n];
                         if(valor[k] == listaDeNoTerminales[0].valor && listaNT[0] == listaDeNoTerminales[0].valor){
                             listaDeNoTerminales.unshift(new ProduccionAceptada(listaDeNoTerminales[0].valor+'´'));
                             listaDeNoTerminales[0].producciones.push(listaDeNoTerminales[1].valor);
@@ -491,17 +515,11 @@ function eliminacionSimbolosUnitarios(){
                     }
                     for(var z = 0 ; z < listaDeNoTerminales.length ; z++){
                         if(listaDeNoTerminales[z].valor == palabra[k]){
-                            console.log(z);
                             var c = z;
                         }
                     }
                     if(c != undefined){
-                        console.log('-----------');
-                        console.log(listaDeNoTerminales[c].producciones);
-                        console.log(produccionesVar);
-                        console.log('-----------');
                         produccionesVar = mezclar(produccionesVar, listaDeNoTerminales[c].producciones); 
-                        console.log(produccionesVar);
                     }
                     
                 }
@@ -524,3 +542,16 @@ function mezclar(listaProducciones, listaConcatenar){
     }
     return listaProducciones;
 }
+© 2018 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Press h to open a hovercard with more details.
